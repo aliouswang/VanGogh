@@ -1,5 +1,6 @@
 package com.aliouswang.vangogh;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
@@ -58,5 +59,17 @@ public class Vangogh {
         }
 
     };
+
+    public enum LoadedFrom {
+        MEMORY(Color.GREEN),
+        DISK(Color.BLUE),
+        NETWORK(Color.RED);
+
+        final int debugColor;
+
+        private LoadedFrom(int debugColor) {
+            this.debugColor = debugColor;
+        }
+    }
 
 }
