@@ -1,6 +1,9 @@
 package com.aliouswang.vangogh;
 
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 
 /**
  * Image downloading, transformation, and caching manager.
@@ -18,6 +21,42 @@ public class Vangogh {
         void onImageLoadFailed(Vangogh vangogh, Uri uri, Exception exception);
     }
 
+    public interface RequestTransformer {
+        Request transformRequest(Request request);
 
+        RequestTransformer IDENTITY = new RequestTransformer() {
+            @Override
+            public Request transformRequest(Request request) {
+                return request;
+            }
+        };
+    }
+
+
+    public enum Priority {
+        LOW,
+        NORMAL,
+        HIGH
+    }
+
+    static final String TAG = "vangogh";
+    static final Handler HANDLER = new Handler(Looper.getMainLooper()) {
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case Dispatcher.HUNTER_BATCH_COMPLETE: {
+
+                }
+                case Dispatcher.REQUEST_GCED: {
+
+                }
+                case Dispatcher.REQUEST_BATCH_RESUME: {
+
+                }
+            }
+        }
+
+    };
 
 }
