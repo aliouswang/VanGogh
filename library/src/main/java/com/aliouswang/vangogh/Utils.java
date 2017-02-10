@@ -1,5 +1,7 @@
 package com.aliouswang.vangogh;
 
+import android.os.Looper;
+
 /**
  * Created by aliouswang on 17/2/9.
  */
@@ -43,5 +45,28 @@ public final class Utils {
     static final String VERB_ERRORED = "errored";
     static final String VERB_PAUSED = "paused";
     static final String VERB_RESUMED = "resumed";
+
+    static <T> T checkNotNull(T value, String message) {
+        if (value == null) {
+            throw new NullPointerException(message);
+        }
+        return value;
+    }
+
+    static void checkNotMain() {
+        if (isMain()) {
+            throw new IllegalStateException("Method call should not happen from the main thread.");
+        }
+    }
+
+    static void checkMain() {
+        if (!isMain()) {
+            throw new IllegalStateException("Method call should happen from the main thread.");
+        }
+    }
+
+    static boolean isMain() {
+        return Looper.getMainLooper().getThread() == Thread.currentThread();
+    }
 
 }
